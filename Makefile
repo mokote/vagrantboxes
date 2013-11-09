@@ -7,3 +7,8 @@ vmware: ubuntu-12.04.json clean
 	vagrant box remove ubuntu1204-test
 	vagrant box add ubuntu1204-test ubuntu-12.04-server-amd64-vmware.box
 
+virtualbox: ubuntu-12.04.json clean
+	packer validate $<
+	packer build -only=virtualbox $<
+	vagrant box remove ubuntu1204-test
+	vagrant box add ubuntu1204-test ubuntu-12.04-server-amd64-virtualbox.box
