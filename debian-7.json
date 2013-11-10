@@ -1,0 +1,64 @@
+{
+    "builders": [
+        {
+            "type": "vmware",
+            "guest_os_type": "debian6-64",
+            "iso_url": "http://cdimage.debian.org/cdimage/release/7.2.0/amd64/iso-cd/debian-7.2.0-amd64-netinst.iso",
+            "iso_checksum": "48dd0a26678f383710e992954c15b4cf034cc4cdebdfb8902d6d1e5d2752f003",
+            "iso_checksum_type": "sha256",
+            "boot_wait": "30s",
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+                "debian-installer=en_US ",
+                "auto ",
+                "locale=en_US ",
+                "kbd-chooser/method=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "netcfg/get_hostname={{.Name}} ",
+                "netcfg/get_domain=local ",
+                "fb=false ",
+                "debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false ",
+                "console-keymaps-at/keymap=us <enter><wait>"
+            ],
+            "http_directory": "debian-7",
+            "http_port_min": 8000,
+            "http_port_max": 9000,
+            "headless": true,
+            "tools_upload_flavor": "linux",
+            "ssh_wait_timeout": "20m",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "disk_size": 40000,
+            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -hP now",
+            "vmx_data": {
+                "memsize": "2048",
+                "numvcpus": "1",
+                "cpuid.coresPerSocket": "1"
+            }
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                "debian-7/base.sh",
+                "debian-7/vmware_fusion.sh",
+                "debian-7/vagrant_keys.sh",
+                "debian-7/cleanup.sh"
+            ],
+            "execute_command" : "echo 'vagrant' | sudo -S sh '{{.Path}}'"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "output": "debian-7.2.0-amd64-{{.Provider}}.box",
+            "vagrantfile_template": "Vagrantfile.txt"
+        }
+    ]
+}
