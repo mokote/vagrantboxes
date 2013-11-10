@@ -107,7 +107,7 @@
     "post-processors": [
         {
             "type": "vagrant",
-            "output": "ubuntu-12.04.3-server-amd64-{{.Provider}}.box",
+            "output": "ubuntu-12.04.3-amd64-{{.Provider}}.box",
             "vagrantfile_template": "Vagrantfile.txt"
         }
     ]
