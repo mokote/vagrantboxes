@@ -13,7 +13,7 @@ Feel free to send us any feedback here or file an issue.
 Boxes Available
 ---------------
 * [Ubuntu 12.04.3 for VMWare](http://mokote.com/vagrantboxes/ubuntu-12.04.3-amd64-vmware.box) (641M)
-* [Debian 7.2.0 Wheezy for VMWare](debianhttp://mokote.com/vagrantboxes/debian-7.2.0-amd64-vmware.box) (456M)
+* [Debian 7.2.0 Wheezy for VMWare](http://mokote.com/vagrantboxes/debian-7.2.0-amd64-vmware.box) (456M)
 
 
 Usage
