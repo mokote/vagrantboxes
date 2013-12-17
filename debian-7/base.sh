@@ -1,7 +1,3 @@
-#!/bin/bash
-
-date > /etc/packer_build_time
-
 # Tweak sshd to prevent DNS resolution (speed up logins).
 echo 'UseDNS no' >> /etc/ssh/sshd_config
 
@@ -19,11 +15,11 @@ EOF
 
 update-grub
 
-# Add vagrant to the "sudo" group to alow no-password mode for vagrant.
+# Add vagrant to the "sudo" group to allow no-password mode for vagrant.
 echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 usermod -a -G sudo vagrant
 
 # Install software for the base box to come packaged with.
 apt-get -y --force-yes update
 aptitude -y safe-upgrade
-apt-get install -y sudo less vim-nox tcpdump tcpflow curl mc psmisc zip unzip bzip2 openssh-server whois strace
+apt-get install -y sudo less curl mc psmisc zip unzip bzip2 openssh-server whois strace

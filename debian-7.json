@@ -1,12 +1,21 @@
 {
+    "variables": {
+        "provisioner": "provisionerless",
+        "provisioner_version": "",
+        "iso_url": "http://cdimage.debian.org/debian-cd/7.4.0/amd64/iso-cd/debian-7.4.0-amd64-netinst.iso",
+        "iso_checksum": "b712a141bc60269db217d3b3e456179bd6b181645f90e4aac9c42ed63de492e9",
+        "iso_checksum_type": "sha256",
+        "disk_size": 12000,
+        "output_prefix": "debian-7.4.0-amd64"
+    },
+
     "builders": [
         {
-            "type": "vmware",
-            "guest_os_type": "debian6-64",
-            "iso_url": "http://cdimage.debian.org/cdimage/release/7.2.0/amd64/iso-cd/debian-7.2.0-amd64-netinst.iso",
-            "iso_checksum": "48dd0a26678f383710e992954c15b4cf034cc4cdebdfb8902d6d1e5d2752f003",
-            "iso_checksum_type": "sha256",
-            "boot_wait": "30s",
+            "type": "vmware-iso",
+            "guest_os_type": "debian7-64",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
             "boot_command": [
                 "<esc><wait>",
                 "install ",
@@ -23,42 +32,103 @@
                 "console-setup/ask_detect=false ",
                 "console-keymaps-at/keymap=us <enter><wait>"
             ],
-            "http_directory": "debian-7",
-            "http_port_min": 8000,
-            "http_port_max": 9000,
+            "boot_wait": "30s",
+            "disk_size": "{{user `disk_size`}}",
             "headless": true,
-            "tools_upload_flavor": "linux",
-            "ssh_wait_timeout": "20m",
-            "ssh_username": "vagrant",
-            "ssh_password": "vagrant",
-            "disk_size": 40000,
+            "http_directory": "debian-7",
+            "http_port_max": 9000,
+            "http_port_min": 8000,
             "shutdown_command": "echo 'vagrant' | sudo -S shutdown -hP now",
+            "ssh_password": "vagrant",
+            "ssh_username": "vagrant",
+            "ssh_wait_timeout": "20m",
+            "tools_upload_flavor": "linux",
             "vmx_data": {
+                "cpuid.coresPerSocket": "1",
                 "memsize": "2048",
-                "numvcpus": "1",
-                "cpuid.coresPerSocket": "1"
+                "numvcpus": "1"
             }
+        },
+
+        {
+            "type": "virtualbox-iso",
+            "guest_os_type": "Debian_64",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+                "debian-installer=en_US ",
+                "auto ",
+                "locale=en_US ",
+                "kbd-chooser/method=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "netcfg/get_hostname={{.Name}} ",
+                "netcfg/get_domain=local ",
+                "fb=false ",
+                "debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false ",
+                "console-keymaps-at/keymap=us <enter><wait>"
+            ],
+            "boot_wait": "30s",
+            "disk_size": "{{user `disk_size`}}",
+            "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+            "virtualbox_version_file": ".vbox_version",
+            "http_directory": "debian-7",
+            "http_port_max": 9000,
+            "http_port_min": 8000,
+            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -hP now",
+            "ssh_password": "vagrant",
+            "ssh_username": "vagrant",
+            "ssh_wait_timeout": "20m",
+            "vboxmanage": [
+                [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+                [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+            ]
         }
     ],
 
     "provisioners": [
         {
-            "type": "shell",
+            "execute_command": "echo 'vagrant' | sudo -E -S sh '{{.Path}}'",
+            "script": "debian-7/base.sh",
+            "type": "shell"
+        },
+
+        {
+            "override": {
+                "virtualbox-iso": { "execute_command": "/bin/true" },
+                "vmware-iso": { "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'" }
+            },
+            "script": "debian-7/fusion.sh",
+            "type": "shell"
+        },
+
+        {
+            "override": {
+                "virtualbox-iso": { "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'" },
+                "vmware-iso": { "execute_command": "/bin/true" }
+            },
+            "script": "debian-7/virtualbox.sh",
+            "type": "shell"
+        },
+
+        {
+            "execute_command": "echo 'vagrant' | sudo -E -S sh '{{.Path}}'",
             "scripts": [
-                "debian-7/base.sh",
-                "debian-7/vmware_fusion.sh",
                 "debian-7/vagrant_keys.sh",
                 "debian-7/cleanup.sh"
             ],
-            "execute_command" : "echo 'vagrant' | sudo -S sh '{{.Path}}'"
+            "type": "shell"
         }
     ],
 
     "post-processors": [
         {
             "type": "vagrant",
-            "output": "debian-7.2.0-amd64-{{.Provider}}.box",
-            "vagrantfile_template": "Vagrantfile.txt"
+            "output": "{{user `output_prefix`}}-{{.Provider}}.box"
         }
     ]
 }

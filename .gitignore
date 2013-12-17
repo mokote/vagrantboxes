@@ -1,0 +1,6 @@
+.DS_Store
+
+# Vagrant and Packer stuff
+*.box
+packer_cache
+output-*
