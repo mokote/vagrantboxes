@@ -23,6 +23,9 @@ VirtualBox:
 Usage
 -----
 
-    vagrant box add ubuntu1204 http://mokote.com/vagrantboxes/ubuntu-12.04.3-amd64-vmware.box
+    vagrant box add ubuntu1204 http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-vmware.box
 
 See [Vagrant documentation](http://docs.vagrantup.com/v2/boxes.html) for more details.
+
+
+Our boxes on VagrantCloud: [vagrantcloud.com/mokote](https://vagrantcloud.com/mokote/)
