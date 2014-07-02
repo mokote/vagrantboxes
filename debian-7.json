@@ -2,11 +2,11 @@
     "variables": {
         "provisioner": "provisionerless",
         "provisioner_version": "",
-        "iso_url": "http://cdimage.debian.org/debian-cd/7.4.0/amd64/iso-cd/debian-7.4.0-amd64-netinst.iso",
-        "iso_checksum": "b712a141bc60269db217d3b3e456179bd6b181645f90e4aac9c42ed63de492e9",
+        "iso_url": "http://cdimage.debian.org/debian-cd/7.5.0/amd64/iso-cd/debian-7.5.0-amd64-netinst.iso",
+        "iso_checksum": "dcc0165f562218eb8535b1beec040a43731391700b99610262593852674f7d67",
         "iso_checksum_type": "sha256",
         "disk_size": 12000,
-        "output_prefix": "debian-7.4.0-amd64"
+        "output_prefix": "debian-7.5.0-amd64"
     },
 
     "builders": [
