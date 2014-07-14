@@ -13,11 +13,11 @@ Boxes Available
 
 VMWare:
 * [Ubuntu 12.04.4 for VMWare](http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-vmware.box) (852M)
-* [Debian 7.4.0 Wheezy for VMWare](http://mokote.com/vagrantboxes/debian-7.4.0-amd64-vmware.box) (489M)
+* [Debian 7.6 Wheezy for VMWare](http://mokote.com/vagrantboxes/debian-7.6.0-amd64-vmware.box) (471M)
 
 VirtualBox:
 * [Ubuntu 12.04.4 for VirtualBox](http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-virtualbox.box) (572M)
-* [Debian 7.4.0 Wheezy for VirtualBox](http://mokote.com/vagrantboxes/debian-7.4.0-amd64-virtualbox.box) (339M)
+* [Debian 7.6 Wheezy for VirtualBox](http://mokote.com/vagrantboxes/debian-7.6.0-amd64-virtualbox.box) (349M)
 
 
 Usage
