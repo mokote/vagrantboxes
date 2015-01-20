@@ -2,11 +2,11 @@
     "variables": {
         "provisioner": "provisionerless",
         "provisioner_version": "",
-        "iso_url": "http://cdimage.debian.org/debian-cd/7.6.0/amd64/iso-cd/debian-7.6.0-amd64-netinst.iso",
-        "iso_checksum": "ab1008f5460c66e4ab601958ffd6df15bc274ffb3d83072830e8b577c699a429",
+        "iso_url": "http://cdimage.debian.org/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso",
+        "iso_checksum": "e39c36d6adc0fd86c6edb0e03e22919086c883b37ca194d063b8e3e8f6ff6a3a",
         "iso_checksum_type": "sha256",
         "disk_size": 12000,
-        "output_prefix": "debian-7.6.0-amd64"
+        "output_prefix": "debian-7.8.0-amd64"
     },
 
     "builders": [

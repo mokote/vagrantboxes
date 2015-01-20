@@ -11,19 +11,20 @@ Feel free to send us any feedback here or file an issue.
 Boxes Available
 ---------------
 
-VMWare:
-* [Ubuntu 12.04.4 for VMWare](http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-vmware.box) (852M)
-* [Debian 7.6 Wheezy for VMWare](http://mokote.com/vagrantboxes/debian-7.6.0-amd64-vmware.box) (471M)
-
 VirtualBox:
 * [Ubuntu 12.04.4 for VirtualBox](http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-virtualbox.box) (572M)
-* [Debian 7.6 Wheezy for VirtualBox](http://mokote.com/vagrantboxes/debian-7.6.0-amd64-virtualbox.box) (349M)
+* [Debian 7.8 Wheezy for VirtualBox](http://mokote.com/vagrantboxes/debian-7.8.0-amd64-virtualbox.box) (348M)
 
 
 Usage
 -----
 
-    vagrant box add ubuntu1204 http://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-vmware.box
+    vagrant box add debian7 http://mokote.com/vagrantboxes/debian-7.8.0-amd64-virtualbox.box
+
+or
+ 
+    vagrant box add mokote/debian-7
+
 
 See [Vagrant documentation](http://docs.vagrantup.com/v2/boxes.html) for more details.
 
