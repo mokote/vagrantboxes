@@ -1,0 +1,134 @@
+{
+    "variables": {
+        "provisioner": "provisionerless",
+        "provisioner_version": "",
+        "iso_url": "http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso",
+        "iso_checksum": "63a41c2ebbcfd08e3dede2379037399f3245b71d3b64aa14272c23c0d6c617f7",
+        "iso_checksum_type": "sha256",
+        "disk_size": 6000,
+        "output_prefix": "debian-8.0.0-amd64"
+    },
+
+    "builders": [
+        {
+            "type": "vmware-iso",
+            "guest_os_type": "debian7-64",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+                "debian-installer=en_US ",
+                "auto ",
+                "locale=en_US ",
+                "kbd-chooser/method=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "netcfg/get_hostname={{.Name}} ",
+                "netcfg/get_domain=local ",
+                "fb=false ",
+                "debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false ",
+                "console-keymaps-at/keymap=us <enter><wait>"
+            ],
+            "boot_wait": "30s",
+            "disk_size": "{{user `disk_size`}}",
+            "headless": true,
+            "http_directory": "debian-8",
+            "http_port_max": 9000,
+            "http_port_min": 8000,
+            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -hP now",
+            "ssh_password": "vagrant",
+            "ssh_username": "vagrant",
+            "ssh_wait_timeout": "20m",
+            "tools_upload_flavor": "linux",
+            "vmx_data": {
+                "cpuid.coresPerSocket": "1",
+                "memsize": "2048",
+                "numvcpus": "1"
+            }
+        },
+
+        {
+            "type": "virtualbox-iso",
+            "guest_os_type": "Debian_64",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "boot_command": [
+                "<esc><wait>",
+                "install ",
+                "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+                "debian-installer=en_US ",
+                "auto ",
+                "locale=en_US ",
+                "kbd-chooser/method=us ",
+                "keyboard-configuration/xkb-keymap=us ",
+                "netcfg/get_hostname={{.Name}} ",
+                "netcfg/get_domain=local ",
+                "fb=false ",
+                "debconf/frontend=noninteractive ",
+                "console-setup/ask_detect=false ",
+                "console-keymaps-at/keymap=us <enter><wait>"
+            ],
+            "boot_wait": "30s",
+            "disk_size": "{{user `disk_size`}}",
+            "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+            "virtualbox_version_file": ".vbox_version",
+            "http_directory": "debian-8",
+            "http_port_max": 9000,
+            "http_port_min": 8000,
+            "shutdown_command": "echo 'vagrant' | sudo -S shutdown -hP now",
+            "ssh_password": "vagrant",
+            "ssh_username": "vagrant",
+            "ssh_wait_timeout": "20m",
+            "vboxmanage": [
+                [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+                [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+            ]
+        }
+    ],
+
+    "provisioners": [
+        {
+            "execute_command": "echo 'vagrant' | sudo -E -S sh '{{.Path}}'",
+            "script": "debian-8/base.sh",
+            "type": "shell"
+        },
+
+        {
+            "override": {
+                "virtualbox-iso": { "execute_command": "/bin/true" },
+                "vmware-iso": { "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'" }
+            },
+            "script": "debian-8/fusion.sh",
+            "type": "shell"
+        },
+
+        {
+            "override": {
+                "virtualbox-iso": { "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'" },
+                "vmware-iso": { "execute_command": "/bin/true" }
+            },
+            "script": "debian-8/virtualbox.sh",
+            "type": "shell"
+        },
+
+        {
+            "execute_command": "echo 'vagrant' | sudo -E -S sh '{{.Path}}'",
+            "scripts": [
+                "debian-8/vagrant_keys.sh",
+                "debian-8/cleanup.sh"
+            ],
+            "type": "shell"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "output": "{{user `output_prefix`}}-{{.Provider}}.box"
+        }
+    ]
+}
