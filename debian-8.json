@@ -2,11 +2,11 @@
     "variables": {
         "provisioner": "provisionerless",
         "provisioner_version": "",
-        "iso_url": "http://cdimage.debian.org/debian-cd/8.0.0/amd64/iso-cd/debian-8.0.0-amd64-netinst.iso",
-        "iso_checksum": "63a41c2ebbcfd08e3dede2379037399f3245b71d3b64aa14272c23c0d6c617f7",
+        "iso_url": "http://cdimage.debian.org/debian-cd/8.1.0/amd64/iso-cd/debian-8.1.0-amd64-netinst.iso",
+        "iso_checksum": "5d0a1f804d73aee73eee7efbb38456390558094fd19894a573f1514ca44347e0",
         "iso_checksum_type": "sha256",
-        "disk_size": 6000,
-        "output_prefix": "debian-8.0.0-amd64"
+        "disk_size": "6000",
+        "output_prefix": "debian-8.1.0-amd64"
     },
 
     "builders": [
