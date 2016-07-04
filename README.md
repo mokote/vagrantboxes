@@ -14,7 +14,7 @@ Boxes Available
 * [Debian 8.1 Jessie for VirtualBox](https://mokote.com/vagrantboxes/debian-8.1.0-amd64-virtualbox.box) (486M)
 * [Debian 7.8 Wheezy for VirtualBox](https://mokote.com/vagrantboxes/debian-7.8.0-amd64-virtualbox.box) (348M)
 * [Ubuntu 12.04.4 for VirtualBox](https://mokote.com/vagrantboxes/ubuntu-12.04.4-amd64-virtualbox.box) (572M)
-
+* [Ubuntu 16.04 for VirtualBox](https://mokote.com/vagrantboxes/ubuntu-16.04-amd64-virtualbox.box) (604M)
 
 Usage
 -----
