@@ -18,4 +18,3 @@ if [ "$VBOX_VERSION" == '4.3.10' ]; then
   # https://www.virtualbox.org/ticket/12879
   sudo ln -s "/opt/VBoxGuestAdditions-$VBOX_VERSION/lib/VBoxGuestAdditions" /usr/lib/VBoxGuestAdditions
 fi
-
