@@ -26,7 +26,7 @@ usermod -a -G sudo vagrant
 apt-get -y --force-yes update
 aptitude -y safe-upgrade
 apt-get install --no-install-recommends -y sudo less curl mc psmisc zip unzip bzip2 whois strace
-apt-get install --no-install-recommends -y sudo python-minimal
+apt-get install --no-install-recommends -y sudo python
 
 
 # reboot
