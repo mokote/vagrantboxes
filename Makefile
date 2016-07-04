@@ -21,6 +21,7 @@ ubuntu1604-test: ubuntu-16.04-amd64-virtualbox.box
 	vagrant box add --name test $<
 	vagrant up
 	-vagrant ssh
+	vagrant destroy --force
 	vagrant box remove --force test
 
 debian7: debian-7.json
