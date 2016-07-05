@@ -64,6 +64,11 @@
         },
         {
             "type": "shell",
+            "script": "ubuntu-16.04/python.sh",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        },
+        {
+            "type": "shell",
             "scripts": [
                 "ubuntu-16.04/vagrant_keys.sh",
                 "ubuntu-16.04/cleanup.sh"
