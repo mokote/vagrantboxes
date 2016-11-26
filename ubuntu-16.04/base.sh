@@ -20,7 +20,7 @@ update-grub
 
 # Install software for the base box to come packaged with.
 apt-get -y --force-yes update
-aptitude -y safe-upgrade
+# aptitude -y safe-upgrade
 apt-get install --no-install-recommends -y sudo less curl mc psmisc zip unzip bzip2 whois strace vim-nox
 
 # Add vagrant to the "sudo" group to alow no-password mode for vagrant.

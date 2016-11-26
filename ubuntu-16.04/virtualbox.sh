@@ -1,4 +1,4 @@
-apt-get install -y --no-install-recommends dkms make
+apt-get install --no-install-recommends -y dkms
 
 # Uncomment this if you want to install Guest Additions with support for X
 #sudo apt-get -y install xserver-xorg
