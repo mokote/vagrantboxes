@@ -61,7 +61,7 @@
                 "ubuntu-16.04/vagrant_keys.sh",
                 "ubuntu-16.04/cleanup.sh"
             ],
-            "execute_command" : "echo 'vagrant' | sudo -E -S sh '{{.Path}}'"
+            "execute_command" : "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'"
         }
     ],
 
