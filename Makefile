@@ -12,20 +12,26 @@ clean:
 	rm -rf packer_cache
 
 
-ubuntu1604: ubuntu-16.04.json
+# Ubuntu Server
+ubuntu1604: ubuntu1604-amd64-virtualbox.box
+
+ubuntu1604-test: ubuntu1604-amd64-virtualbox.box
+	./testbox.sh $<
+
+ubuntu1604-amd64-virtualbox.box: ubuntu1604.json
 	packer validate $<
 	packer build -only=virtualbox-iso $<
 
-ubuntu1604-test: ubuntu-16.04.1-amd64-virtualbox.box
+
+# Debian
+debian9: debian9-amd64-virtualbox.box
+
+debian9-test: debian9-amd64-virtualbox.box
 	./testbox.sh $<
 
-
-debian8: debian-8.json
+debian9-amd64-virtualbox.box: debian9.json
 	packer validate $<
 	packer build -only=virtualbox-iso $<
 
-debian8-test: debian-8.*-amd64-virtualbox.box
-	./testbox.sh $<
 
-
-.PHONY: clean
+.PHONY: clean debian9 debian9-test ubuntu1604 ubuntu1604-test
