@@ -26,8 +26,3 @@ apt-get install --no-install-recommends -y sudo less curl mc psmisc zip unzip bz
 # Add vagrant to the "sudo" group to alow no-password mode for vagrant.
 echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 usermod -a -G sudo vagrant
-
-# reboot
-echo "Rebooting the machine..."
-reboot
-sleep 60

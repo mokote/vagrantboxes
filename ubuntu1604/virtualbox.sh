@@ -1,21 +1,15 @@
-#!/bin/bash
+# Install the Linux headers
+apt-get -y --force-yes install gcc build-essential linux-headers-$(uname -r)
 
-set -e
-set -x
+# Install the VirtualBox guest additions
+VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
+VBOX_ISO=VBoxGuestAdditions_$VBOX_VERSION.iso
+mount -o loop $VBOX_ISO /mnt
+yes|sh /mnt/VBoxLinuxAdditions.run
+umount /mnt
 
-sudo apt-get -y install dkms
-sudo apt-get -y install make
+#Cleanup VirtualBox
+rm $VBOX_ISO
 
-# Uncomment this if you want to install Guest Additions with support for X
-#sudo apt-get -y install xserver-xorg
-
-sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
-sudo /mnt/VBoxLinuxAdditions.run || :
-sudo umount /mnt/
-rm -f ~/VBoxGuestAdditions.iso
-
-VBOX_VERSION=$(cat ~/.vbox_version)
-if [ "$VBOX_VERSION" == '4.3.10' ]; then
-  # https://www.virtualbox.org/ticket/12879
-  sudo ln -s "/opt/VBoxGuestAdditions-$VBOX_VERSION/lib/VBoxGuestAdditions" /usr/lib/VBoxGuestAdditions
-fi
+# Remove packages used for building, since they aren't needed anymore
+apt-get -y --force-yes remove gcc build-essential linux-headers-$(uname -r)
