@@ -6,7 +6,7 @@
         "iso_checksum": "9d98f339016dc2a3998881949a8f0678baede26b5106f18ef1168d7e13606773",
         "iso_checksum_type": "sha256",
         "disk_size": "6000",
-        "output_prefix": "debian9-amd64",
+        "output_prefix": "debian9.0.0-amd64",
         "config_dir": "debian9"
     },
 
