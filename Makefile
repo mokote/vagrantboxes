@@ -14,7 +14,7 @@ clean:
 
 
 # Debian 9 "Stretch"
-DEBIAN_9_VERSION="9.0.0"
+DEBIAN_9_VERSION="9.1.0"
 
 debian9: debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box
 
