@@ -27,7 +27,7 @@ debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box: debian9.json
 
 
 # Ubuntu Server 16.04
-UBUNTU_1604_VERSION="16.04.2"
+UBUNTU_1604_VERSION="16.04.3"
 
 ubuntu1604: ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box
 
