@@ -10,22 +10,13 @@ Feel free to send us any feedback here or file an issue.
 
 Available Boxes
 ---------------
-
-* [Ubuntu 16.04.1 for VirtualBox](https://mokote.com/vagrantboxes/ubuntu-16.04.1-amd64-virtualbox.box) (594M)
-* [Debian 8.6.0 Jessie for VirtualBox](https://mokote.com/vagrantboxes/debian-8.6.0-amd64-virtualbox.box) (542M)
-
+Please take a look at [https://app.vagrantup.com/mokote/](https://app.vagrantup.com/mokote/) for available boxes.
 
 Usage
 -----
 
-    vagrant box add debian-8 http://mokote.com/vagrantboxes/debian-8.6.0-amd64-virtualbox.box
-
-or
-
-    vagrant box add mokote/debian-8
+    vagrant init mokote/debian9
+    vagrant up
 
 
 See [Vagrant documentation](http://docs.vagrantup.com/v2/boxes.html) for more details.
-
-
-Our boxes on Vagrant Atlas: [atlas.hashicorp.com/mokote/](https://atlas.hashicorp.com/mokote/)
