@@ -2,11 +2,11 @@
     "variables": {
         "provisioner": "provisionerless",
         "provisioner_version": "",
-        "iso_url": "https://cdimage.debian.org/debian-cd/9.2.1/amd64/iso-cd/debian-9.2.1-amd64-netinst.iso",
-        "iso_checksum": "ec78bc48b48d676775b60eda41528ec33c151c2ce7414a12b13d9b73d34de544",
+        "iso_url": "https://cdimage.debian.org/debian-cd/9.4.0/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso",
+        "iso_checksum": "124d270006703f2111224dec3bf7a9d01450168be41d4834f88fdd035552b044",
         "iso_checksum_type": "sha256",
         "disk_size": "12000",
-        "output_prefix": "debian9.2.1-amd64",
+        "output_prefix": "{{env `DEBIAN_9_VERSION`}}-amd64",
         "config_dir": "debian9"
     },
 
@@ -36,7 +36,7 @@
             "disk_size": "{{user `disk_size`}}",
             "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
             "virtualbox_version_file": ".vbox_version",
-            "http_directory": "{{ user `config_dir` }}",
+            "http_directory": "{{user `config_dir`}}",
             "http_port_max": 9000,
             "http_port_min": 8000,
             "headless": true,
@@ -55,10 +55,10 @@
         {
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
             "scripts": [
-                "{{ user `config_dir` }}/base.sh",
-                "{{ user `config_dir` }}/virtualbox.sh",
-                "{{ user `config_dir` }}/vagrant_keys.sh",
-                "{{ user `config_dir` }}/cleanup.sh"
+                "{{user `config_dir`}}/base.sh",
+                "{{user `config_dir`}}/virtualbox.sh",
+                "{{user `config_dir`}}/vagrant_keys.sh",
+                "{{user `config_dir`}}/cleanup.sh"
             ],
             "type": "shell"
         }
