@@ -2,8 +2,8 @@
     "variables": {
         "provisioner": "provisionerless",
         "provisioner_version": "",
-        "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.4-server-amd64.iso",
-        "iso_checksum": "0a03608988cfd2e50567990dc8be96fb3c501e198e2e6efcb846d89efc7b89f2",
+        "iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso",
+        "iso_checksum": "6b505fd3b6f816f8ff058710f127a9900e9233e496783ce08a0022814d224810",
         "iso_checksum_type": "sha256",
         "disk_size": "45000",
         "output_prefix": "ubuntu{{env `UBUNTU_1604_VERSION`}}-amd64",
