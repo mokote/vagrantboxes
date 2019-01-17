@@ -1,23 +1,24 @@
-default: targets
+default: help
 
-
-targets:
+.PHONY: help
+help:
 	@echo "Known targets:"
 	@grep -e '^\w' Makefile | grep ':' | cut -d: -f1 | grep -v default | grep -v targets
 	@echo
 
-
+.PHONY: clean
 clean:
 	rm -rf *.box output-*
 	rm -rf packer_cache
 
 
-
 # Debian 9 "Stretch"
 export DEBIAN_9_VERSION=9.6.0
 
+.PHONY: debian9
 debian9: debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box
 
+.PHONY: debian9-test
 debian9-test: debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box
 	./testbox.sh $<
 
@@ -27,16 +28,15 @@ debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box: debian9.json
 
 
 # Ubuntu Server 16.04
-export UBUNTU_1604_VERSION=16.04.4
+export UBUNTU_1604_VERSION=16.04.5
 
+.PHONY: ubuntu1604
 ubuntu1604: ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box
 
+.PHONY: ubuntu1604-test
 ubuntu1604-test: ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box
 	./testbox.sh $<
 
 ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box: ubuntu1604.json
 	packer validate $<
 	packer build -only=virtualbox-iso $<
-
-
-.PHONY: clean debian9 debian9-test ubuntu1604 ubuntu1604-test
