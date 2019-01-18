@@ -40,3 +40,18 @@ ubuntu1604-test: ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box
 ubuntu$(UBUNTU_1604_VERSION)-amd64-virtualbox.box: ubuntu1604.json
 	packer validate $<
 	packer build -only=virtualbox-iso $<
+
+
+# Ubuntu Server 18.04
+export UBUNTU_1804_VERSION=18.04.1.0
+
+.PHONY: ubuntu1804
+ubuntu1804: ubuntu$(UBUNTU_1804_VERSION)-amd64-virtualbox.box
+
+.PHONY: ubuntu1804-test
+ubuntu1804-test: ubuntu$(UBUNTU_1804_VERSION)-amd64-virtualbox.box
+	./testbox.sh $<
+
+ubuntu$(UBUNTU_1804_VERSION)-amd64-virtualbox.box: ubuntu1804.json
+	packer validate $<
+	packer build -only=virtualbox-iso $<
