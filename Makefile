@@ -12,7 +12,7 @@ clean:
 	rm -rf packer_cache
 
 
-# Debian 9 "Stretch"
+# Debian 9 "stretch"
 export DEBIAN_9_VERSION=9.9.0
 
 .PHONY: debian9
@@ -23,6 +23,21 @@ debian9-test: debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box
 	./testbox.sh $<
 
 debian$(DEBIAN_9_VERSION)-amd64-virtualbox.box: debian9.json
+	packer validate $<
+	packer build -only=virtualbox-iso $<
+
+
+# Debian 10 "buster"
+export DEBIAN_10_VERSION=10.0.0
+
+.PHONY: debian10
+debian10: debian$(DEBIAN_10_VERSION)-amd64-virtualbox.box
+
+.PHONY: debian10-test
+debian10-test: debian$(DEBIAN_10_VERSION)-amd64-virtualbox.box
+	./testbox.sh $<
+
+debian$(DEBIAN_10_VERSION)-amd64-virtualbox.box: debian10.json
 	packer validate $<
 	packer build -only=virtualbox-iso $<
 
